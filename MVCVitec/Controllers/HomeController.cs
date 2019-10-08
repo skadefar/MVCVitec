@@ -4,12 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MVCVitec.Models;
 
 namespace MVCVitec.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ILogger logger;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            this.logger = logger;
+        }
         public IActionResult Index()
         {
             return View();
