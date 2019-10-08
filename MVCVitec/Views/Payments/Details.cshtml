@@ -1,0 +1,54 @@
+﻿@model UCLVitecMV.Models.Payment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Payment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CardNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperationMonth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExperationMonth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperationYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExperationYear)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardCWR)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardCWR)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RowVersion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RowVersion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CardHolderName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CardHolderName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
