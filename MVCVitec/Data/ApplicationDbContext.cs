@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using UCLVitecMV.Models;
+using UCLVitecMV.Model;
 
 namespace MVCVitec.Data
 {
@@ -12,5 +14,8 @@ namespace MVCVitec.Data
             : base(options)
         {
         }
+        public DbSet<UCLVitecMV.Models.Admin> Admin { get; set; }
+        public DbSet<UCLVitecMV.Models.Payment> Payment { get; set; }
+        public DbSet<UCLVitecMV.Model.Product> Product { get; set; }
     }
 }

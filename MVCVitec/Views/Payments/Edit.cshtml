@@ -1,0 +1,54 @@
+﻿@model UCLVitecMV.Models.Payment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Payment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="CardNumber" class="control-label"></label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperationMonth" class="control-label"></label>
+                <input asp-for="ExperationMonth" class="form-control" />
+                <span asp-validation-for="ExperationMonth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperationYear" class="control-label"></label>
+                <input asp-for="ExperationYear" class="form-control" />
+                <span asp-validation-for="ExperationYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardCWR" class="control-label"></label>
+                <input asp-for="CardCWR" class="form-control" />
+                <span asp-validation-for="CardCWR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardHolderName" class="control-label"></label>
+                <input asp-for="CardHolderName" class="form-control" />
+                <span asp-validation-for="CardHolderName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
