@@ -18,6 +18,8 @@ namespace MVCVitec.Controllers
         }
         public IActionResult Index()
         {
+           string Message = $"Vist  {DateTime.Now.ToLocalTime()}";
+            logger.LogWarning($"Message {Message} ");
             return View();
         }
 
