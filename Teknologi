@@ -1,0 +1,88 @@
+    Server 
+
+    Vi benytter os af servere, som holder vores filer som gør det muligt for os at dele dem med andre klienter. En server er en computer, som har til formål at dele sine ressourcer og filer med andre computere. En servers formål er at give antal klienter/enheder adgang til regnekraft og/eller data. 
+
+    Client 
+
+    Vi har klienter fordi vi har hardware og software som skal tilgå den service vi gør tilgængelig for dem over internettet. En klient er en computer som tilgår en server. 
+
+    Gateway 
+
+    Vi benytter os af gateway, som er et link imellem to computer programmer, eller systemer, da vi bland andet har et betalings modul.  
+
+    Mac adresser 
+
+    Vi ”benytter” os af MAC adresser da vi har flere forskellige hardware enheder der skal kunne tilgå vores webadresse. En MAC adresse (media access control) er den fysiske adresse der lægger i alle fysiske enheder med netværkskort. 
+
+    IP adresser 
+
+    Vi benytter os af IP adresser da vores produkt lægger på vores hjemmeside. En IP adresse er en virtuel adresse der er blevet givet til et stykke hardware af en DHCP server, så et system kan kommunikere med et andet. 
+
+    Subnet masker 
+
+    Vi benytter subnet masker til at bestemme om data kan sendes direkte til en host eller om det skal sendes til gatewayen. En subnet maske er et filter en computer lægger ovenpå IP adressen, hvor den ”låser” bitsene hvis en bit er ændret i de ”låste” bits, betyder det som at adressen ikke er lokal og skal sendes via en gateway, hvis der er en, ellers fejler den. Den sammenligner så dens egen adresse, og den adresse man vil havde fat i, ved hjælp af subnet masken, tjekker den så om der er nogle ændringer i de låste bits. 
+
+    Router 
+
+    Da vi bruger os af en website, og vores website ikke kun er tilgængelig på et lokalt netværk, bliver der brugt routere til at forbinde forbindelser sammen, over forskellige netværk. En router er et stykke hardware der forbinder flere computere sammen over et netværk, ved hjælp af processen routing, så andre computere eller stykker af hardware kan forbinde til denne igennem den forhenværende nævnte forbindelsen. 
+
+    Host 
+
+    Vores host er en cloudhost, fordi vi benytter os af Azure hvor vores webhotel eksisteret. En cloudhost er baseret cloud computing teknologier som tillader en masse forskellige servere kan fungere som et system, som garantere at en hjemmeside kan blive besøgt af flere forskellige enheder. 
+
+ 
+
+Http (hyper text transfer protocol) er en standardiseret måde, hvorpå en bestemt procedure er udført. Den benyttes i en adresselinje til at fortælle browseren hvordan man korrekt bearbejde dataene på siden og vise data til en computer bruger. (Hyper = et akronym, dette benyttes til at beskrive at teksten ikke er lineær, og faktisk kan være forbundet på mange måder.  
+
+FTP  er den primære protokol, der bruges til overføre store mængder data fra sted til sted på tværs af internettet er kendt som. En user kan få adgang til FTP-servere ved hjælp af FTP-klient software (FileZILLA). Populære webbrowsere er også i stand til at få adgang til filer, der er placeret på en FTP_Server (chrome, safari duck duck go, osv. ’ En FTP -server dybest set ser ud til at en computer bruger som fjernbetjening harddisk og gennemse filer på en FTP-server svarer til at gennemse en computers harddisk med en fil manager.  
+
+TCP /IP netværksprotokol pakke, der er hovedansvarlig for overførsel af rå-data over internettet er kendt som TCP /IP. Forkortelsen står for en kombination af Transfer Control Protocol og Internet Protocol . TCP side primært beskriver, hvordan computerne tilsluttes , og hvordan data skal sendes over internettet korrekt. Internet netværksadressering begreber som en IP-adresse er en del af IP- side af TCP /IP-protokollen suite. Hver forbindelse til internettet har en unik numerisk adresse oger   er kendt som en IP-adresse .  
+
+Proxy  
+
+Fungere som en slags firewall, som kan have forskellige funktioner - såsom; Caching, filtering, load balancing, authentication og logging.  
+
+Sockets 
+
+Er et endepunkt i en to vejs kommunikations link på samme netværk. Det er knyttet op til et port nummer, da TCP kan identificere applikation. Et endepunkt er en kombination af en IP adresse og et port nummer. 
+
+Det vil sige sockets ”åbner et lag af kommunikation der er påkrævet for at en computer skal kunne kommunikere med en anden computer. 
+
+Sockets har mulighed for at kommunikere og sende information til en udvalgt computer. 
+
+ 
+
+ITERATION 3 
+
+implementation:  
+
+Vitec's produkter ligger allerede på deres server, hvortil vi benytter API’er til at tilgå disse. 
+
+En anden adskilt server er, hvor vi hoster vores website, nemlig igennem Azure. 
+
+Molbipay kommer også til at forgå gennem et andet server system. 
+
+Kort kommer til at forgår gennem nets. 
+
+Hvis vi vælger at tilføje CPR-nummer, som Vitec er glade for at bruge, vil det også komme fra en anden server. 
+
+Vitec har også et admin brugermodul som de ønsker tilkobles til vores løsning, hvilket vil befinde sig på deres egen server.  
+
+Database vil befinde sig på azure’s database tjeneste.  
+
+Login portal implementeres igennem asp.net Core, og vi forestiller os at denne del af systemet kan ligge på en særskilt server. 
+
+
+Ulemper: 
+
+    Vores it-sikkerhed er vanskelig at opsætte. 
+
+    Hvis en af vores tredje parts systemer går ned, vil den funktion på hjemmesiden mangle. 
+
+    Vi skal sikker at alle tredje parts systemerne virker til den samme version af programmet. 
+
+Fordele: 
+
+    Up-time er bedre (når en server går ned, går hele websiten ikke nødvendigvis ned. 
+
+    Sikkerheden for personlige oplysninger er forberedt, da kunde oplysninger ikke er hostede hos os. 
