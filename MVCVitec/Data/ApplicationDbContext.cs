@@ -4,7 +4,6 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UCLVitecMV.Models;
-using UCLVitecMV.Model;
 
 namespace MVCVitec.Data
 {
@@ -14,8 +13,8 @@ namespace MVCVitec.Data
             : base(options)
         {
         }
-        public DbSet<UCLVitecMV.Models.Admin> Admin { get; set; }
-        public DbSet<UCLVitecMV.Models.Payment> Payment { get; set; }
-        public DbSet<UCLVitecMV.Model.Product> Product { get; set; }
+        public DbSet<Admin> Admin { get; set; }
+        public DbSet<Payment> Payment { get; set; }
+        public DbSet<Product> Product { get; set; }
     }
 }
