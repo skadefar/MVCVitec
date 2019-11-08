@@ -8,7 +8,6 @@ namespace UCLVitecMV.Models
 {
     public class User
     {
-
         public int UserID { get; set; }
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]

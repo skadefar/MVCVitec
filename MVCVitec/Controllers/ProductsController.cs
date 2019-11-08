@@ -1,28 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCVitec.Data;
-using UCLVitecMV.Model;
+using Newtonsoft.Json;
+using UCLVitecMV.Models;
 
 namespace MVCVitec.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly ApiWork a = new ApiWork();
         public ProductsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            List<Product> products = a.GetApiData();
+            return View(products);
         }
 
         // GET: Products/Details/5
@@ -66,14 +73,14 @@ namespace MVCVitec.Controllers
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
+            var product = a.PutProduct(id);
             if (product == null)
             {
                 return NotFound();
@@ -97,8 +104,7 @@ namespace MVCVitec.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    a.PostProduct(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -148,6 +154,71 @@ namespace MVCVitec.Controllers
         private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.ProductID == id);
+        }
+
+        //This internal class exists only to test an API & should be deleted or buried later on.
+        internal class ApiWork
+        {
+            public List<Product> GetApiData()
+            {
+                HttpWebRequest WebReq = (HttpWebRequest)WebRequest.Create(
+                    string.Format("https://localhost:44340//api/apiproducts"));
+
+                WebReq.Method = "GET";
+
+                HttpWebResponse WebResp = (HttpWebResponse)WebReq.GetResponse();
+                string jsonString;
+                using (Stream stream = WebResp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+                    jsonString = reader.ReadToEnd();
+                }
+                List<Product> list = JsonConvert.DeserializeObject<List<Product>>(jsonString);
+
+                return list;
+            }
+            public string PutProduct(int id)
+            {
+                string put;
+                string url = "https://localhost:44340//api/apiproducts/" + id;
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+                request.Method = "PUT";
+
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                using (Stream stream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream, System.Text.Encoding.UTF8);
+                    put = reader.ReadToEnd();
+                }
+                return put;
+            }
+            public string PostProduct(Product product)
+            {
+                string obj = JsonConvert.SerializeObject(product);
+                Uri uri = new Uri("https://localhost:44340//api/apiproducts/");
+
+                HttpContent content = new StringContent(obj, Encoding.UTF8, "application/json");
+                string response = PostMovieData(uri, content).ToString();
+
+                return response;
+            }
+
+            private async Task<string> PostMovieData(Uri uri, HttpContent content)
+            {
+                string response = string.Empty;
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage result = await client.PostAsync(uri, content);
+
+                    if (result.IsSuccessStatusCode)
+                    {
+                        response = result.StatusCode.ToString();
+                    }
+                }
+                return response;
+            }
         }
     }
 }

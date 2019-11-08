@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UCLVitecMV.Model
+namespace UCLVitecMV.Models
 {
     public class Product
     {
