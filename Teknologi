@@ -86,3 +86,50 @@ Fordele:
     Up-time er bedre (når en server går ned, går hele websiten ikke nødvendigvis ned. 
 
     Sikkerheden for personlige oplysninger er forberedt, da kunde oplysninger ikke er hostede hos os. 
+    
+    ITERATION 4 
+
+Listen over de emner/begreber fra faget Teknologi I anvender i jeres løsning skal opdateres. 
+
+Giv en kort beskrivelse af hvilke sikkerhedsmæssige problemstillinger der skal overvejes ifm. jeres løsning. 
+
+Vurder, for hver af disse problemstillinger, hvad I kan gøre for at sikkerheden for jeres løsning er så høj som man med rimelighed kan forlange. 
+
+ 
+
+Liste over begreber: 
+
+API 
+
+API URL location 
+
+ORM 
+
+Hashing  
+
+Måske SALT til vores passwords i User (til Log Ind) 
+
+It-sikkerhed: 
+
+Entitityframework object relational mapping (ORM) tager sig af SQL opstillingen, og tillader os ikke nødvendigvis selv at skulle f.eks: indbygge ting som stored-procedures i vores SQL kode for at forebygge SQL injections. 
+Det skal dog siges at bare fordi man bruger ORM, er man ikke helt sikret mod SQL injections, f.eks. hvis mere komplekse stykker SQL-kode ville blive brugt. 
+
+Hvis ORM ikke kan opfange det, kan vi også bruge parameterized statements, dette ville sørge for at parametrene(inputs) ville blive håndteret korrekt inden det bliver ført ind i databasen. 
+
+Hashing af passwords. Det er nærmere en problemløsning, frem for en problemstilling, problemstillingen kunne lyde at der ikke ville være nok it-sikkerhed ved at opbevare brugernes oplysninger uden hashing. 
+
+Api – Der er to problemstillinger til API 
+
+3.Parts API(Betalings api som EKS.) 
+
+Efter som vi ikke har lavet den, ved vi ikke præcis, hvad der er i den, derfor kan vi ikke stå 100% inde for at den lever op til firmaets sikkerhedspolitik. 
+
+Vores egen 
+
+Hvis vi laver vores egen, støder vi ind i andre sikkerhedsproblemer, nemlig vores viden. Vi vil kunne lave API’er på det niveau som vi er og har styr på, det vil med stor sandsynlighed ikke i første omgang kunne opfylde alle firmaets sikkerhedspolitikker. 
+
+ 
+
+Så hvad kan der gøres ved de to problemstillinger?  Efter som vi går ud fra at vi bruger nets, og ikke en anden indre kendt løsning, må vi gå ud fra at de har styr på deres sikkerhed.  Og hvis vi har tænkt os at laves vores egnen, må vi læse op på stoffet. 
+
+ 
