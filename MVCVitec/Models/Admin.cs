@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace UCLVitecMV.Models
+namespace MVCVitec.Models
 {
     public class Admin
     {

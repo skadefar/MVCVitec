@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UCLVitecMV.Models
+namespace MVCVitec.Models
 {
     public class User
     {
@@ -46,5 +46,6 @@ namespace UCLVitecMV.Models
         [Timestamp]
         public byte[] RowVersion { get; set; }
         public int Phonenumber { get; set; }
+        public ICollection<Product> AbonnomentsProduct { get; set; }
     }
 }
