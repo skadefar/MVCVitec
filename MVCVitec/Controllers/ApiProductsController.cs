@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCVitec.Data;
-using UCLVitecMV.Models;
+using MVCVitec.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,6 +26,12 @@ namespace MVCVitec.Controllers
             }
         }
 
+        //public ActionResult<IEnumerable<Product>> Show()
+        //{
+        //    List<Product> getProducts = context.Product.ToList();
+
+        //    return getProducts;
+        //}
         // GET: api/<controller>
         [HttpGet]
         public List<Product> Get()
@@ -55,13 +61,15 @@ namespace MVCVitec.Controllers
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public async void Put(int id)
+        public void Put(int id, Product product)
         {
-            if(id == null)
+            if(id != product.ProductID)
             {
                 BadRequest();
             }
-            var p = context.Product.Find(id);
+
+            context.Entry(product).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         // DELETE api/<controller>/5

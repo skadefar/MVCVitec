@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCVitec.Data;
 using Newtonsoft.Json;
-using UCLVitecMV.Models;
+using MVCVitec.Models;
 
 namespace MVCVitec.Controllers
 {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UCLVitecMV.Models
+namespace MVCVitec.Models
 {
     public class Product
     {
@@ -28,6 +28,6 @@ namespace UCLVitecMV.Models
         public byte[] RowVersion { get; set; }
         public int ProductID { get; set; }
 
-
+        public ICollection<User> AbonnomentsUser { get; set; }
     }
 }
