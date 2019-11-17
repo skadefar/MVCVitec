@@ -4,14 +4,16 @@ using MVCVitec.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVCVitec.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191115103046_users")]
+    partial class users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,19 +186,6 @@ namespace MVCVitec.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("MVCVitec.Models.Abonnoment", b =>
-                {
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("ProductId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Abonnoments");
-                });
-
             modelBuilder.Entity("MVCVitec.Models.Admin", b =>
                 {
                     b.Property<int>("AdminID")
@@ -226,7 +215,7 @@ namespace MVCVitec.Data.Migrations
 
                     b.HasKey("AdminID");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admin");
                 });
 
             modelBuilder.Entity("MVCVitec.Models.Payment", b =>
@@ -251,7 +240,7 @@ namespace MVCVitec.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("MVCVitec.Models.Product", b =>
@@ -274,9 +263,13 @@ namespace MVCVitec.Data.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
+                    b.Property<int?>("UserID");
+
                     b.HasKey("ProductID");
 
-                    b.ToTable("Products");
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("MVCVitec.Models.User", b =>
@@ -312,7 +305,7 @@ namespace MVCVitec.Data.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -360,17 +353,11 @@ namespace MVCVitec.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MVCVitec.Models.Abonnoment", b =>
+            modelBuilder.Entity("MVCVitec.Models.Product", b =>
                 {
-                    b.HasOne("MVCVitec.Models.Product", "Product")
-                        .WithMany("Abonnoments")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MVCVitec.Models.User", "User")
-                        .WithMany("Abonnoments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("MVCVitec.Models.User")
+                        .WithMany("AbonnomentsProduct")
+                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

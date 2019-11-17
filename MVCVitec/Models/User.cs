@@ -46,6 +46,6 @@ namespace MVCVitec.Models
         [Timestamp]
         public byte[] RowVersion { get; set; }
         public int Phonenumber { get; set; }
-        public ICollection<Product> AbonnomentsProduct { get; set; }
+        public ICollection<Abonnoment> Abonnoments { get; set; }
     }
 }

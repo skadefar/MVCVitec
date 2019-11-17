@@ -20,7 +20,7 @@ namespace MVCVitec.Controllers
         {
             this.context = context;
 
-            if (this.context.Product.Count() == 0)
+            if (this.context.Products.Count() == 0)
             {
                 FillThatDb.PushProducts(context);
             }
@@ -36,7 +36,7 @@ namespace MVCVitec.Controllers
         [HttpGet]
         public List<Product> Get()
         {
-            var getProducts = context.Product;
+            var getProducts = context.Products;
             foreach(var p in getProducts)
             {
                 products.Add(p);
@@ -76,10 +76,10 @@ namespace MVCVitec.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var product = context.Product.Find(id);
+            var product = context.Products.Find(id);
             try
             {
-                context.Product.Remove(product);
+                context.Products.Remove(product);
                 context.SaveChanges();
             }
             catch (DbUpdateException)

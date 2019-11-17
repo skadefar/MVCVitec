@@ -10,7 +10,7 @@ namespace MVCVitec.Data
     {
         public static void PushProducts(ApplicationDbContext context)
         {
-            if (context.Product.Any())
+            if (context.Products.Any())
             {
                 return;
             }
@@ -45,7 +45,7 @@ namespace MVCVitec.Data
 
             foreach (Product p in products)
             {
-                context.Product.Add(p);
+                context.Products.Add(p);
             }
 
             context.SaveChanges();

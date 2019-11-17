@@ -7,25 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCVitec.Data;
 using MVCVitec.Models;
+using MVCVitec.Models.ViewModels;
 
 namespace MVCVitec.Controllers
 {
-    public class AdminsController : Controller
+    public class UsersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AdminsController(ApplicationDbContext context)
+        public UsersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Admins
+        // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Admins.ToListAsync());
+            var viewModel = new AbonnomentData();
+            viewModel.GetUsers = await _context.Users
+                  .Include(i => i.Abonnoments)
+                    .ThenInclude(i => i.Product)
+                  .AsNoTracking()
+                  .OrderBy(i => i.LastName)
+                  .ToListAsync();
+
+            return View(viewModel);
+            //return View(await _context.Abonnoments.ToListAsync());
         }
 
-        // GET: Admins/Details/5
+        // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +43,39 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admins
-                .FirstOrDefaultAsync(m => m.AdminID == id);
-            if (admin == null)
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserID == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(user);
         }
 
-        // GET: Admins/Create
+        // GET: Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admins/Create
+        // POST: Users/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdminID,Password,Email,User_Name,LastName,FirstMidName,Phonenumber,RowVersion")] Admin admin)
+        public async Task<IActionResult> Create([Bind("UserID,Email,Password,Birthday,ZipCode,CPR_number,LastName,FirstMidName,RowVersion,Phonenumber")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(admin);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            return View(user);
         }
 
-        // GET: Admins/Edit/5
+        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +83,22 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admins.FindAsync(id);
-            if (admin == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(admin);
+            return View(user);
         }
 
-        // POST: Admins/Edit/5
+        // POST: Users/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdminID,Password,Email,User_Name,LastName,FirstMidName,Phonenumber,RowVersion")] Admin admin)
+        public async Task<IActionResult> Edit(int id, [Bind("UserID,Email,Password,Birthday,ZipCode,CPR_number,LastName,FirstMidName,RowVersion,Phonenumber")] User user)
         {
-            if (id != admin.AdminID)
+            if (id != user.UserID)
             {
                 return NotFound();
             }
@@ -97,12 +107,12 @@ namespace MVCVitec.Controllers
             {
                 try
                 {
-                    _context.Update(admin);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.AdminID))
+                    if (!UserExists(user.UserID))
                     {
                         return NotFound();
                     }
@@ -113,10 +123,10 @@ namespace MVCVitec.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(admin);
+            return View(user);
         }
 
-        // GET: Admins/Delete/5
+        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +134,30 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var admin = await _context.Admins
-                .FirstOrDefaultAsync(m => m.AdminID == id);
-            if (admin == null)
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.UserID == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(admin);
+            return View(user);
         }
 
-        // POST: Admins/Delete/5
+        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var admin = await _context.Admins.FindAsync(id);
-            _context.Admins.Remove(admin);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdminExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Admins.Any(e => e.AdminID == id);
+            return _context.Users.Any(e => e.UserID == id);
         }
     }
 }

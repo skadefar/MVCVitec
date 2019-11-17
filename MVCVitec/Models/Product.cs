@@ -27,7 +27,6 @@ namespace MVCVitec.Models
         [Timestamp]
         public byte[] RowVersion { get; set; }
         public int ProductID { get; set; }
-
-        public ICollection<User> AbonnomentsUser { get; set; }
+        public ICollection<Abonnoment> Abonnoments { get; set; }
     }
 }
