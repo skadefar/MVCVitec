@@ -18,6 +18,10 @@ namespace MVCVitec.Controllers
         public UsersController(ApplicationDbContext context)
         {
             _context = context;
+            if (_context.Users.Count() == 0)
+            {
+                FillThatDb.PushProducts(context);
+            }
         }
 
         // GET: Users
