@@ -35,3 +35,93 @@ body {
         display: none;
     }
 }
+
+/*arbejde på vores hjemmeside*/
+
+.header{
+    padding: 80px;
+    text-align: center;
+    background: #0026ff;
+    color: white;
+}
+
+.header h1 {
+    font-size: 40px;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main {
+    flex: 60%;
+    background-color: #4cff00;
+    padding: 20px;
+}
+
+.side {
+    flex: 40%;
+    background-color: #ff0000;
+    padding: 20px;
+}
+
+.column {
+    position: relative;
+}
+
+.column img{
+    width: 100%;
+    height: auto;
+}
+
+.column .btn-billed1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.column .btn-billed1:hover {
+    background-color: black;
+    }
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+@media screen and (max-width: 700px) {
+    .row {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
+    }
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #808080
+}
+
+
+
