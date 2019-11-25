@@ -132,4 +132,22 @@ Hvis vi laver vores egen, støder vi ind i andre sikkerhedsproblemer, nemlig vor
 
 Så hvad kan der gøres ved de to problemstillinger?  Efter som vi går ud fra at vi bruger nets, og ikke en anden indre kendt løsning, må vi gå ud fra at de har styr på deres sikkerhed.  Og hvis vi har tænkt os at laves vores egnen, må vi læse op på stoffet. 
 
- 
+ Iteration 5: 
+Listen over de emner/begreber fra faget Teknologi I anvender i jeres løsning skal opdateres.
+Uddyb den korte beskrivelse af hvilke sikkerhedsmæssige problemstillinger der skal overvejes ifm. jeres løsning.
+Vurder, for hver af disse problemstillinger, hvad I kan gøre for at sikkerheden for jeres løsning er så høj som man med rimelighed kan forlange.
+Vi har I faget teknologi lært om to nye sikkerhedsmæssige problematikker som kan have indvirkning på løsning. Cross site request forgery og open direct. 
+
+Cross site scripting: (CSRF):
+Cross site request forgery er et type angreb der opstår når et ondsindet; website, E-mail, Blog, chat besked, program eller andet, får en bruger til at udfører en uønsket handlig på en kendt/betroet websted under godkendelses processen. 
+CSRF-angreb virker på grund af at browseranmodninger automatik inkludere alle legitimationsoplysninger, som er knyttet til webstedet, dette værende Brugerens session, cookie, IP-adresse osv. Dette betyder at hvis brugeren godkendes til webstedet, kan webstedet ikke skelne mellem den forfalskede eller legitime anmodning sendt af offeret.
+Forenklet så fungere CSRF ved at Bruge cookie session til at lave en post request på anden åben side
+CSRF angriber et specifikke funktionalitet der har til formål at forårsage en tilstandsændring på serveren, dette kan være at ændre offerets e-mail adresse, kodeord eller måske købe noget. CSRF er altså heraf kun rettet mod ”state-chaning request” siden at det ikke vil gavne angriberen at tvinge ofret til at hente data, siden at ofret modtager svaret og ikke angriberen. 
+For at sikre sig imod CSRF kan man blandt andet benytte sig af session tokens. Disse sørger for der er en nøgle mellem brugeren og siden, dette sikre at det er brugeren der en lacer en request, derved kan en side ikke lave en post request på andre sider, da dette kræver an den side anerkender nøglen.  
+Her er vores kode usikker fordi endnu ikke benytter os af session tokens. 
+
+Open Redirect: 
+En meget almindelig og overset sårbarhed for webudviklere er ”Open Redirect” og kendt som ”unvalidated redrects and forwards”. Et websted er sårbar overfor open redirect når parameter værdier (den del af URL efter ”?”) i en http GET-request giver mulighed for at omdirigere en bruger til et nyt websted uden nogen validering af omdirigeringsmålet. Alt efter arkitekturen på et sårbart websted, kan omdirigere ske på baggrund af forskellige handlinger, f.eks. Login, andre gange kan det ske det med det samme ved indlæsningen af en side. 
+Et eksempel på et sårbart webstedlink kan f.eks. være: ”https://www.google.com/search?RelayState=http%3A%2F%2Fexample.com%2Fnext”. I dette eksempel angiver ”RelayState”- parameteret hvor brugeren sendes ved vellykket login (i dette eksempel er det ”http://example.com/next”. Hvis webstedet ikke validere parameterværdien ”RelayState” for at sikre sig, at mål websiden er legitim og den ønskede hjemmeside, kan angriberen manipulere denne parameter for at sende et offer til en falsk side udformet af angriberen. 
+Man kan sikre sig imod dette ved at Whiteliste hvilke url´s der må omdirigeres. Dette betyder også at vores projekt løsning ikke er sikker endnu, da vi ikke har whitelisted Url´s endnu. 
+
