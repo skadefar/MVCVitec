@@ -28,6 +28,5 @@ namespace MVCVitec.Models
         public byte[] RowVersion { get; set; }
         public int ProductID { get; set; }
 
-        public ICollection<User> AbonnomentsUser { get; set; }
     }
 }

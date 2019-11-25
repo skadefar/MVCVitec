@@ -16,5 +16,6 @@ namespace MVCVitec.Data
         public DbSet<Admin> Admin { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<MVCVitec.Models.Campaign> Campaign { get; set; }
     }
 }
