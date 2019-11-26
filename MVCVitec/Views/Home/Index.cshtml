@@ -8,14 +8,19 @@
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
+    <h1>Vitecs produkter</h1>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
             <div class="carousel-caption" role="option">
+                <h3>CD-ord</h3>
                 <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
+                    Læse- og skriveværktøjet CD-ORD er kendt for at forløse ordblinde børn og voksnes potentiale for at læse, skrive og lære.
+
+                    Ved hjælp af oplæsning og kontekstbaserede ordforslag afhjælper programmet langsom læsning og fejl i skrivning og stavning. Det giver både større frihed og selvhjulpenhed og baner vejen for faglig succes.
+
+                    <a class="btn btn-default" href="https://www.mv-nordic.com/dk/produkter/cd-ord/">
+                        Læs mere her
                     </a>
                 </p>
             </div>
@@ -23,10 +28,11 @@
         <div class="item">
             <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
             <div class="carousel-caption" role="option">
+                <h3>IntoWords</h3>
                 <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
+                    Med støtten fra programmet får du frigivet energi til at koncentrere dig om det vigtige i teksten: Indholdet. IntoWords kan være vejen til højere karakterer i skolen, bedre resultater på jobbet og større selvtillid eller frihed i tilværelsen
+                    <a class="btn btn-default" href="https://www.mv-nordic.com/dk/produkter/intowords/">
+                        Læs mere her
                     </a>
                 </p>
             </div>
@@ -34,10 +40,13 @@
         <div class="item">
             <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
             <div class="carousel-caption" role="option">
+                <h3>Grammateket</h3>
                 <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
+                    Grammateket kan rette din tekst for fejl i grammatik, sætningsopbygning og tegnsætning.
+
+                    Vil du lære grammatik, kan du dykke ned i programmets forklaringer af rettelser. Grammateket egner sig også til undervisning og læring.
+                    <a class="btn btn-default" href="https://www.mv-nordic.com/dk/produkter/grammateket/">
+                        Læs mere her
                     </a>
                 </p>
             </div>
@@ -53,42 +62,53 @@
     </a>
 </div>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Page Title</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
-    <h1>Vitec hjemmeside her under</h1>
-</body>
-</html>
+<style>
+    .column1 {
+        float: right;
+    }li::before {
+  background-color: #c00;
+  width: 2px;
+  content: '';
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 5px;
+}li {
+   
+  position: relative;
 
-<div class="header">
-    <h1>Vitec Website</h1>
-    <p>En hjemmeside lavet til Vitec MV</p>
-</div>
-
+  
+  margin: 0;
+  padding-bottom: 1em;
+  padding-left: 20px;
+}li::after {
+  content: '';
+  position: absolute;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' aria-hidden='true' viewBox='0 0 32 32' focusable='false'%3E%3Ccircle stroke='none' fill='%23c00' cx='16' cy='16' r='10'%3E%3C/circle%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  left: 0;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+}
+</style>
 <div class="row">
-    <div class="column">
-        <img src="~/billeder/forest.jpg" alt="Forest" style="width:100%"/>
-            <button class="btn-billed1"> Example</button>
-            @*<p>
-            Copy-Paste knap fra exemple koden til hjemmesidder.
-            <a class="btn btn-billed1" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                Lær mere
-            </a>
-        </p>*@
+    <div class="News">
+       <h4>Nyheder</h4> 
+        <ul>
+            <li>Første nyhed</li>
+            <li>Anden nyhed</li>
+
+        </ul>
+    </div>
+    <div class="column1">
+        <img src="~/images/IntoWords.png" alt="Forest" style="width:40%" />
+        <button class="btn-billed1"> Example</button>
+       
     </div>
     <div class="column">
-        <img src="~/billeder/mountain.jpg" alt="Mountain" style="width:100%" />
+        <img src="~/images/IntoWords.png" alt="Mountain" style="width:40%" />
         <p>
             Copy-Paste knap fra exemple koden til hjemmesidder.
             <a class="btn btn-billed2" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
@@ -98,6 +118,4 @@
     </div>
 </div>
 
-<div class="modal-footer">
-    <h2>Footer</h2>
-</div>
+ 
