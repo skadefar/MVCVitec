@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCVitec", "MVCVitec\MVCVit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "intefrations-test", "intefrations-test\intefrations-test.csproj", "{6D1DE5B2-1B9A-40D1-A4B3-FBA1C66F6424}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCVitec.IntergrationsTests", "MVCVitec.IntergrationsTests\MVCVitec.IntergrationsTests.csproj", "{75041C50-8CE2-46E7-A2F0-33AA5D600AA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6D1DE5B2-1B9A-40D1-A4B3-FBA1C66F6424}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D1DE5B2-1B9A-40D1-A4B3-FBA1C66F6424}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D1DE5B2-1B9A-40D1-A4B3-FBA1C66F6424}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75041C50-8CE2-46E7-A2F0-33AA5D600AA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75041C50-8CE2-46E7-A2F0-33AA5D600AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75041C50-8CE2-46E7-A2F0-33AA5D600AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75041C50-8CE2-46E7-A2F0-33AA5D600AA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
