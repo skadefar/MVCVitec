@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MVCVitec.Models
 {
@@ -25,8 +21,6 @@ namespace MVCVitec.Models
         [Range(001, 999, ErrorMessage = "Ugyldigt CWR indtastet")]
         public int CardCWR { get; set; }
 
-        [Timestamp]
-        public byte[] RowVersion { get; set; }
         public string CardHolderName { get; set; }
     }
 }

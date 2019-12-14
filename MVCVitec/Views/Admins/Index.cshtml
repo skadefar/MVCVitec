@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCVitec.Models.Admin>
+﻿@model List<MVCVitec.Models.User>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,11 +9,11 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
+@*<table class="table">*@
+    @*<thead>*@
+        @*<tr>*@
+            @*<th>
+                @Html.DisplayFor(model => model.Password)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
@@ -36,7 +36,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>*@
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User_Name)
+                @Html.DisplayFor(modelItem => item.FirstMidName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
@@ -61,11 +61,11 @@
                 @Html.DisplayFor(modelItem => item.RowVersion)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AdminID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AdminID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AdminID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.UserID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
             </td>
         </tr>
 }
-    </tbody>
-</table>
+    @*</tbody>
+</table>*@

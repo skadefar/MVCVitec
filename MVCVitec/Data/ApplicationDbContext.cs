@@ -13,9 +13,17 @@ namespace MVCVitec.Data
             : base(options)
         {
         }
-        public DbSet<Admin> Admin { get; set; }
-        public DbSet<Payment> Payment { get; set; }
-        public DbSet<Product> Product { get; set; }
-        public DbSet<MVCVitec.Models.Campaign> Campaign { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<User> ApplicationUsers { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Abonnoment>()
+                .HasKey(key => new { key.ProductId, key.UserId });
+        }
     }
 }

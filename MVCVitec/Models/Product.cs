@@ -8,6 +8,7 @@ namespace MVCVitec.Models
 {
     public class Product
     {
+        public int ProductId { get; set; }
 
         [Display(Name = "Navn:")]
         public string Name { get; set; }
@@ -26,7 +27,6 @@ namespace MVCVitec.Models
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
-        public int ProductID { get; set; }
-
+        public ICollection<Abonnoment> Abonnoments { get; set; }
     }
 }

@@ -6,6 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20191208125317_fixIT.cs" />
+    <Compile Remove="Data\Migrations\20191208125317_fixIT.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191208125423_fixIT.cs" />
+    <Compile Remove="Data\Migrations\20191208125423_fixIT.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191208125742_fixIT.cs" />
+    <Compile Remove="Data\Migrations\20191208125742_fixIT.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191208125851_fixIT.cs" />
+    <Compile Remove="Data\Migrations\20191208125851_fixIT.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191208130053_fixItPlease.cs" />
+    <Compile Remove="Data\Migrations\20191208130053_fixItPlease.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
@@ -14,6 +27,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

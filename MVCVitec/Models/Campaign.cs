@@ -11,7 +11,6 @@ namespace MVCVitec.Models
         public string CampaignName { get; set; }
         public string CampaignDescriotion { get; set; }
         public int CampaignPrice { get; set; }
-        public Product Price {get; set;}
         public string CampaignRules { get; set; }
 
 

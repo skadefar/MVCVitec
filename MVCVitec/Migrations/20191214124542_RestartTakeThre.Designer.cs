@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace MVCVitec.Data.Migrations
+namespace MVCVitec.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191115105334_Campaigns")]
-    partial class Campaigns
+    [Migration("20191214124542_RestartTakeThre")]
+    partial class RestartTakeThre
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,6 +186,19 @@ namespace MVCVitec.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("MVCVitec.Models.Abonnoment", b =>
+                {
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("ProductId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Abonnoment");
+                });
+
             modelBuilder.Entity("MVCVitec.Models.Admin", b =>
                 {
                     b.Property<int>("AdminID")
@@ -215,7 +228,7 @@ namespace MVCVitec.Data.Migrations
 
                     b.HasKey("AdminID");
 
-                    b.ToTable("Admin");
+                    b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("MVCVitec.Models.Campaign", b =>
@@ -232,13 +245,9 @@ namespace MVCVitec.Data.Migrations
 
                     b.Property<string>("CampaignRules");
 
-                    b.Property<int?>("PriceProductID");
-
                     b.HasKey("CampaignId");
 
-                    b.HasIndex("PriceProductID");
-
-                    b.ToTable("Campaign");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("MVCVitec.Models.Payment", b =>
@@ -257,18 +266,14 @@ namespace MVCVitec.Data.Migrations
 
                     b.Property<int>("ExperationYear");
 
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
                     b.HasKey("ID");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("MVCVitec.Models.Product", b =>
                 {
-                    b.Property<int>("ProductID")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -286,9 +291,46 @@ namespace MVCVitec.Data.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.HasKey("ProductID");
+                    b.HasKey("ProductId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("MVCVitec.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Birthday");
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FirstMidName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("OwnerID");
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<int>("Phonenumber");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<int>("UserIs");
+
+                    b.Property<int>("ZipCode");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("ApplicationUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,11 +378,17 @@ namespace MVCVitec.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MVCVitec.Models.Campaign", b =>
+            modelBuilder.Entity("MVCVitec.Models.Abonnoment", b =>
                 {
-                    b.HasOne("MVCVitec.Models.Product", "Price")
-                        .WithMany()
-                        .HasForeignKey("PriceProductID");
+                    b.HasOne("MVCVitec.Models.Product", "Product")
+                        .WithMany("Abonnoments")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MVCVitec.Models.User", "User")
+                        .WithMany("Abonnoments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

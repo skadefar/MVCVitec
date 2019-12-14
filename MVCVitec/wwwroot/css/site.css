@@ -35,3 +35,7 @@ body {
         display: none;
     }
 }
+
+#front-campaign {
+    max-height: 500px;
+}
