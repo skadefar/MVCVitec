@@ -16,13 +16,13 @@ namespace MVCVitec.Controllers
         private readonly ApplicationDbContext context;
         private readonly List<User> users = new List<User>();
 
-        public ApiUsersController(ApplicationDbContext context)
+        public ApiUsersController(ApplicationDbContext contextt)
         {
-            this.context = context;
+            this.context = contextt;
 
             if (this.context.User.Count() == 0)
             {
-                FillThatDb.PushProducts(context);
+                FillThatDb.PushProducts(contextt);
             }
         }
 

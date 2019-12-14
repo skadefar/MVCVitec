@@ -18,5 +18,6 @@ namespace MVCVitec.Data
         public DbSet<Product> Product { get; set; }
         public DbSet<MVCVitec.Models.Campaign> Campaign { get; set; }
         public DbSet<MVCVitec.Models.User> User { get; set; }
+        public DbSet<MVCVitec.Models.Abonnoment> Abonnoment { get; set; }
     }
 }

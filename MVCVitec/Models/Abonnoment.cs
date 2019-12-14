@@ -7,6 +7,7 @@ namespace MVCVitec.Models
 {
     public class Abonnoment
     {
+        public int AbonnomentId { get; set; }
         public Product Product { get; set; }
         public User User { get; set; }
         public int ProductId { get; set; }
