@@ -64,7 +64,7 @@ namespace MVCVitec.Controllers
             if (ModelState.IsValid)
             {
                 string response = connect.PostData(product);
-                return LocalRedirect(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
@@ -115,7 +115,7 @@ namespace MVCVitec.Controllers
                         throw;
                     }
                 }
-                return LocalRedirect(nameof(Index));
+                return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
@@ -134,7 +134,7 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            return LocalRedirect(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: Products/Delete/5
@@ -144,7 +144,7 @@ namespace MVCVitec.Controllers
         {
             var product = connect.GetData().Find(x => x.ProductId == id);
             connect.DeleteData(id);
-            return LocalRedirect(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)

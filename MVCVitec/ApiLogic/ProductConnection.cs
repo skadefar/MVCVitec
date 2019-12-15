@@ -38,7 +38,7 @@ namespace MVCVitec.Data
         public string DeleteData(int id)
         {
             string json;
-            string deleteApiLink = "link";
+            string deleteApiLink = link;
             deleteApiLink = deleteApiLink + "/" + id;
 
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(deleteApiLink);

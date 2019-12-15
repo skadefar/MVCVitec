@@ -9,10 +9,9 @@ namespace MVCVitec.Models
     {
         public int CampaignId { get; set; }
         public string CampaignName { get; set; }
-        public string CampaignDescriotion { get; set; }
+        public string CampaignDescription { get; set; }
         public int CampaignPrice { get; set; }
-        public string CampaignRules { get; set; }
-
-
+        public int OldPrice { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

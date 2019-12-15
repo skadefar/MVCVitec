@@ -34,10 +34,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
                     <li><a asp-area="" asp-controller="Products" asp-action="Index">Software Løsninger</a></li>
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <li><a asp-area="" asp-controller="Users" asp-action="Index">Brugere</a></li>
+                        <li><a asp-area="" asp-controller="Campaigns" asp-action="Index">Kampagner</a></li>
                     }
                 </ul>
                 <button type="button" class="btn btn-sm navbar-form" style="margin-left: 5px; float: right; width: auto;"
@@ -46,7 +48,7 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                     Hjælp
-                    
+
                 </button>
                 <form class="form-inline navbar-form" style="margin-left: 30px; justify-content: flex-end; float: right; max-height: 10px; width: auto;">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -57,7 +59,7 @@
 
             </div>
         </div>
-        
+
     </nav>
 
     <partial name="_CookieConsentPartial" />
@@ -83,6 +85,9 @@
 
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="Index">Admin Dashboard</a>
                     </li>
                 </ol>
             </div>

@@ -14,7 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using MVCVitec.Authorization;
+using MVCVitec.Services;
 
 namespace MVCVitec
 {
@@ -36,30 +36,16 @@ namespace MVCVitec
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddScoped<CampaignService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseInMemoryDatabase("DefaultConnection"));
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc(config =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                            .RequireAuthenticatedUser()
-                            .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
-            })
+            services.AddMvc()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddScoped<IAuthorizationHandler,
-                          UserIsOwnerAuthorizationHandler>();
-
-            services.AddSingleton<IAuthorizationHandler,
-                          AdministratorsAuthorizationHandler>();
-
-            services.AddSingleton<IAuthorizationHandler,
-                          ManagerAuthorizationHandler>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

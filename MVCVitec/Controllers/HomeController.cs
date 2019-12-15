@@ -17,8 +17,6 @@ namespace MVCVitec.Controllers
 
         public HomeController(ILogger<HomeController> logger)
         {
-            List<Product> products = connect.GetData();
-
             this.logger = logger;
         }
         public IActionResult Index()

@@ -3,6 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: bisque;
 }
 
 /* Wrapping element */
@@ -39,3 +40,5 @@ body {
 #front-campaign {
     max-height: 500px;
 }
+
+

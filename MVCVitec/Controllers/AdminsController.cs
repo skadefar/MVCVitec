@@ -7,45 +7,26 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MVCVitec.Authorization;
 using MVCVitec.Data;
 using MVCVitec.Models;
 
 namespace MVCVitec.Controllers
 {
-    [Authorize]
     public class AdminsController : Controller
     {
-        protected ApplicationDbContext Context { get; }
-        protected IAuthorizationService AuthorizationService { get; }
-        protected UserManager<IdentityUser> UserManager { get; }
+        protected ApplicationDbContext _context;
 
-        public AdminsController(
-            ApplicationDbContext context,
-            IAuthorizationService authorizationService,
-            UserManager<IdentityUser> userManager)
+        public AdminsController(ApplicationDbContext context)
         {
-            Context = context;
-            UserManager = userManager;
-            AuthorizationService = authorizationService;
+            _context = context;
         }
 
         // GET: Admins
         public async Task<IActionResult> Index()
         {
-            var users = from c in Context.ApplicationUsers
+            var users = from c in _context.ApplicationUsers
                            select c;
-
-            var isAuthorized = User.IsInRole(Constants.ManagersRole) ||
-                               User.IsInRole(Constants.AdministratorsRole);
-
-            var currentUserId = UserManager.GetUserId(User);
             
-            if (!isAuthorized)
-            {
-                users = users.Where(c => c.UserIs == UserLevel.Admin
-                                            || c.OwnerID == currentUserId);
-            }
             return View(users.ToList());
 
         }
@@ -58,7 +39,7 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var admin = await Context.Admins
+            var admin = await _context.Admins
                 .FirstOrDefaultAsync(m => m.AdminID == id);
             if (admin == null)
             {
@@ -83,8 +64,8 @@ namespace MVCVitec.Controllers
         {
             if (ModelState.IsValid)
             {
-                Context.Add(admin);
-                await Context.SaveChangesAsync();
+                _context.Add(admin);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(admin);
@@ -98,7 +79,7 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var admin = await Context.Admins.FindAsync(id);
+            var admin = await _context.Admins.FindAsync(id);
             if (admin == null)
             {
                 return NotFound();
@@ -122,8 +103,8 @@ namespace MVCVitec.Controllers
             {
                 try
                 {
-                    Context.Update(admin);
-                    await Context.SaveChangesAsync();
+                    _context.Update(admin);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -149,7 +130,7 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var admin = await Context.Admins
+            var admin = await _context.Admins
                 .FirstOrDefaultAsync(m => m.AdminID == id);
             if (admin == null)
             {
@@ -164,15 +145,15 @@ namespace MVCVitec.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var admin = await Context.Admins.FindAsync(id);
-            Context.Admins.Remove(admin);
-            await Context.SaveChangesAsync();
+            var admin = await _context.Admins.FindAsync(id);
+            _context.Admins.Remove(admin);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AdminExists(int id)
         {
-            return Context.Admins.Any(e => e.AdminID == id);
+            return _context.Admins.Any(e => e.AdminID == id);
         }
     }
 }
