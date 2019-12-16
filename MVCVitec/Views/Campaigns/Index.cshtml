@@ -1,53 +1,25 @@
 ﻿@model IEnumerable<MVCVitec.Models.Campaign>
+@using MVCVitec.Services;
+@inject CampaignService Products
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CampaignName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CampaignDescriotion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CampaignPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CampaignRules)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignDescriotion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CampaignRules)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CampaignId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CampaignId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CampaignId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card-deck">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h3 class="card-title"><b>@item.CampaignName</b></h3>
+                <h4 style="text-decoration: line-through; color: red;">Pris: @item.OldPrice,- DKK</h4>
+                <h4>Kampagne pris: @item.CampaignPrice,- DKK</h4>
+                <h5 class="card-text">@item.CampaignDescription</h5>
+                <small><a asp-action="Details" asp-route-id="@item.CampaignId" class="btn btn-primary">Detajler</a></small>
+                <small><a asp-action="Edit" asp-route-id="@item.CampaignId" class="btn btn-primary">Edit</a></small>
+                <small><a asp-action="Delete" asp-route-id="@item.CampaignId" class="btn btn-primary">Delete</a></small>
+            </div>
+        </div>
+    }
+</div>

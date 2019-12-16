@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVCVitec.Models;
+using MVCVitec.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MVCVitec.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger logger;
+        private readonly ProductConnection connect = new ProductConnection();
+
         public HomeController(ILogger<HomeController> logger)
         {
             this.logger = logger;

@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MVCVitec</title>
+    <title>@ViewData["Title"] - Vitec + </title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -26,29 +30,67 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MVCVitec</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><b>Vitec+</b></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    <li><a asp-area="" asp-controller="Products" asp-action="Create">Product list</a></li>
-                    <li><a asp-area="" asp-controller="Products" asp-action="Index">Administrate products | Admin Modul</a></li>
-                    <li><a asp-area="" asp-controller="Admins" asp-action="Index">Administrate user | Admin Modul </a></li>
-                    </ul>
+
+                    <li><a asp-area="" asp-controller="Products" asp-action="Index">Software Løsninger</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li><a asp-area="" asp-controller="Users" asp-action="Index">Brugere</a></li>
+                        <li><a asp-area="" asp-controller="Campaigns" asp-action="Index">Kampagner</a></li>
+                    }
+                </ul>
+                <button type="button" class="btn btn-sm navbar-form" style="margin-left: 5px; float: right; width: auto;"
+                        data-container="body" data-toggle="popover" data-placement="bottom" data-content="Well, you're on your own.">
+                    <div class="spinner-border" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    Hjælp
+
+                </button>
+                <form class="form-inline navbar-form" style="margin-left: 30px; justify-content: flex-end; float: right; max-height: 10px; width: auto;">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
                 <partial name="_LoginPartial" />
+
             </div>
         </div>
+
     </nav>
 
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
+        <hr />
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2019 - MVCVitec</p>
+            <div class="navbar navbar-inverse navbar-fixed-bottom">
+                <ol class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark"><b>&copy; 2019 - Vitec</b></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Information</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Admins" asp-action="Index">Admin Dashboard</a>
+                    </li>
+                </ol>
+            </div>
         </footer>
     </div>
 

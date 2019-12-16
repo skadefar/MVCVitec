@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MVCVitec.ApiLogic;
 using MVCVitec.Data;
 using MVCVitec.Models;
 
@@ -13,16 +13,33 @@ namespace MVCVitec.Controllers
     public class CampaignsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly CampaignConnection connect = new CampaignConnection();
+        private readonly ProductConnection connectProduct = new ProductConnection();
 
         public CampaignsController(ApplicationDbContext context)
         {
             _context = context;
+            if(context.Campaigns.Count() is 0)
+            {
+                List<Campaign> campaigns = connect.GetData();
+                List<Product> products = connectProduct.GetData();
+                foreach (Campaign c in campaigns)
+                {
+                    _context.Campaigns.Add(c);
+                }
+                foreach(Product p in products)
+                {
+                    _context.Products.Add(p);
+                }
+                _context.SaveChanges();
+            }
+            
         }
 
         // GET: Campaigns
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Campaign.ToListAsync());
+            return View(await _context.Campaigns.ToListAsync());
         }
 
         // GET: Campaigns/Details/5
@@ -33,8 +50,8 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var campaign = await _context.Campaign
-                .FirstOrDefaultAsync(m => m.CampaignId == id);
+            var campaign = await _context.Campaigns.FirstOrDefaultAsync(x => x.CampaignId == id);
+
             if (campaign == null)
             {
                 return NotFound();
@@ -54,12 +71,13 @@ namespace MVCVitec.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CampaignId,CampaignName,CampaignDescriotion,CampaignPrice,CampaignRules")] Campaign campaign)
+        public async Task<IActionResult> Create([Bind("CampaignId,CampaignName,CampaignDescription,CampaignPrice,CampaignRules")] Campaign campaign)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(campaign);
-                await _context.SaveChangesAsync();
+                //var selectedProduct = campaign.Products;
+                //campaign.OldPrice = selectedProduct;
+                string response = connect.PostData(campaign);
                 return RedirectToAction(nameof(Index));
             }
             return View(campaign);
@@ -73,7 +91,7 @@ namespace MVCVitec.Controllers
                 return NotFound();
             }
 
-            var campaign = await _context.Campaign.FindAsync(id);
+            var campaign = connect.GetData().Find(x => x.CampaignId == id);
             if (campaign == null)
             {
                 return NotFound();
@@ -97,8 +115,7 @@ namespace MVCVitec.Controllers
             {
                 try
                 {
-                    _context.Update(campaign);
-                    await _context.SaveChangesAsync();
+                    connect.PostData(campaign);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,15 +134,14 @@ namespace MVCVitec.Controllers
         }
 
         // GET: Campaigns/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var campaign = await _context.Campaign
-                .FirstOrDefaultAsync(m => m.CampaignId == id);
+            var campaign = connect.DeleteData(id);
             if (campaign == null)
             {
                 return NotFound();
@@ -139,15 +155,28 @@ namespace MVCVitec.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var campaign = await _context.Campaign.FindAsync(id);
-            _context.Campaign.Remove(campaign);
-            await _context.SaveChangesAsync();
+            var campaign = connect.GetData().Find(x => x.CampaignId == id);
+            connect.DeleteData(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool CampaignExists(int id)
         {
-            return _context.Campaign.Any(e => e.CampaignId == id);
+            return connect.GetData().Any(e => e.CampaignId == id);
         }
+        //public ActionResult SelectProduct()
+        //{
+        //    List<Product> listOfProducts = _context.Products.ToList();
+
+        //    List<SelectListItem> products = new List<SelectListItem>();
+
+        //    foreach (Product p in listOfProducts)
+        //    {
+        //        products.Add(new SelectListItem { Text = "Produkt", Value = p.Name });
+        //    }
+
+        //    ViewBag.CampaignProduct = products;
+        //    return View();
+        //}
     }
 }
