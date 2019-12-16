@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCVitec.ApiLogic;
 using MVCVitec.Data;
@@ -13,6 +14,7 @@ namespace MVCVitec.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly CampaignConnection connect = new CampaignConnection();
+        private readonly ProductConnection connectProduct = new ProductConnection();
 
         public CampaignsController(ApplicationDbContext context)
         {
@@ -20,9 +22,14 @@ namespace MVCVitec.Controllers
             if(context.Campaigns.Count() is 0)
             {
                 List<Campaign> campaigns = connect.GetData();
+                List<Product> products = connectProduct.GetData();
                 foreach (Campaign c in campaigns)
                 {
                     _context.Campaigns.Add(c);
+                }
+                foreach(Product p in products)
+                {
+                    _context.Products.Add(p);
                 }
                 _context.SaveChanges();
             }
@@ -64,10 +71,12 @@ namespace MVCVitec.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CampaignId,CampaignName,CampaignDescriotion,CampaignPrice,CampaignRules")] Campaign campaign)
+        public async Task<IActionResult> Create([Bind("CampaignId,CampaignName,CampaignDescription,CampaignPrice,CampaignRules")] Campaign campaign)
         {
             if (ModelState.IsValid)
             {
+                //var selectedProduct = campaign.Products;
+                //campaign.OldPrice = selectedProduct;
                 string response = connect.PostData(campaign);
                 return RedirectToAction(nameof(Index));
             }
@@ -155,5 +164,19 @@ namespace MVCVitec.Controllers
         {
             return connect.GetData().Any(e => e.CampaignId == id);
         }
+        //public ActionResult SelectProduct()
+        //{
+        //    List<Product> listOfProducts = _context.Products.ToList();
+
+        //    List<SelectListItem> products = new List<SelectListItem>();
+
+        //    foreach (Product p in listOfProducts)
+        //    {
+        //        products.Add(new SelectListItem { Text = "Produkt", Value = p.Name });
+        //    }
+
+        //    ViewBag.CampaignProduct = products;
+        //    return View();
+        //}
     }
 }

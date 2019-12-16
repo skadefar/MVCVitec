@@ -38,7 +38,9 @@ body {
 }
 
 #front-campaign {
-    max-height: 500px;
+    max-height: 200px;
+    min-height: 200px;
+
 }
 
 
