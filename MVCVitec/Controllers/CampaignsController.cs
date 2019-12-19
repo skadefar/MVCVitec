@@ -14,7 +14,7 @@ namespace MVCVitec.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly CampaignConnection connect = new CampaignConnection();
-        private readonly ProductConnection connectProduct = new ProductConnection();
+     //   private readonly ProductConnection connectProduct = new ProductConnection();
 
         public CampaignsController(ApplicationDbContext context)
         {
@@ -22,15 +22,15 @@ namespace MVCVitec.Controllers
             if(context.Campaigns.Count() is 0)
             {
                 List<Campaign> campaigns = connect.GetData();
-                List<Product> products = connectProduct.GetData();
+            //    List<Product> products = connectProduct.GetData();
                 foreach (Campaign c in campaigns)
                 {
                     _context.Campaigns.Add(c);
                 }
-                foreach(Product p in products)
+               /* foreach(Product p in products)
                 {
                     _context.Products.Add(p);
-                }
+                }*/
                 _context.SaveChanges();
             }
             
