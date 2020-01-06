@@ -19,10 +19,11 @@ namespace MVCVitec.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly ProductConnection connect = new ProductConnection();
+        private readonly ProductConnection connect;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, ProductConnection connect)
         {
+            this.connect = connect;
             _context = context;
         }
 

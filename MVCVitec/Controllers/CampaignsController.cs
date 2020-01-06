@@ -13,27 +13,14 @@ namespace MVCVitec.Controllers
     public class CampaignsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly CampaignConnection connect = new CampaignConnection();
-        private readonly ProductConnection connectProduct = new ProductConnection();
+        private readonly CampaignConnection connect;
+        private readonly ProductConnection connectProduct;
 
-        public CampaignsController(ApplicationDbContext context)
+        public CampaignsController(ApplicationDbContext context, ProductConnection productConnection, CampaignConnection campaignConnection)
         {
+            connect = campaignConnection;
+            connectProduct = productConnection;
             _context = context;
-            //if(context.Campaigns.Count() is 0)
-            //{
-            //    List<Campaign> campaigns = connect.GetData();
-            //    List<Product> products = connectProduct.GetData();
-            //    foreach (Campaign c in campaigns)
-            //    {
-            //        _context.Campaigns.Add(c);
-            //    }
-            //    foreach(Product p in products)
-            //    {
-            //        _context.Products.Add(p);
-            //    }
-            //    _context.SaveChanges();
-            //}
-            
         }
 
         // GET: Campaigns

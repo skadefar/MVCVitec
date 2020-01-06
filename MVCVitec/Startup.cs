@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using MVCVitec.Services;
+using MVCVitec.ApiLogic;
 
 namespace MVCVitec
 {
@@ -38,11 +39,15 @@ namespace MVCVitec
             });
             services.AddScoped<CampaignService>();
 
+            //services.AddScoped<ProductConnection>();
+            //services.AddScoped<CampaignConnection>();
+            //services.AddScoped<UserConnection>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase("DefaultConnection"));
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
+            
             services.AddMvc()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
