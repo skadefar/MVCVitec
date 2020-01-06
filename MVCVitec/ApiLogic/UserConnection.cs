@@ -14,7 +14,7 @@ namespace MVCVitec.Data
     public class UserConnection
     {
 
-        private readonly string link = "https://localhost:44339/api/users";
+        private readonly string link = "https://localhost:44339/api/vitecusers";
         public List<User> GetData()
         {
             List<User> list = new List<User>();
