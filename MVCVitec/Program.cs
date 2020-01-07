@@ -11,7 +11,7 @@ namespace MVCVitec
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main(string[] args)//
         {
             //CreateWebHostBuilder(args).Build().Run();
             var host = CreateWebHostBuilder(args).Build();
